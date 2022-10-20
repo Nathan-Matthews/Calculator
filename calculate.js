@@ -1,5 +1,4 @@
 let displayValue = 0;
-let 
 
 
 const add = function(a,b) {
@@ -42,15 +41,27 @@ const operate = function(a,op,b) {
 
 }
 
-const numb = document.querySelectorAll('.number');
+const numbers = document.querySelectorAll('.number');
 
-numb.forEach((number) => {
+numbers.forEach((number) => {
 
     number.addEventListener("click", () => {
         number.style.backgroundColor = 'black';
     
 });
 });
+
+const ops = document.querySelectorAll('.op');
+
+ops.forEach((op) => {
+
+    op.addEventListener("click", () => {
+        op.style.backgroundColor = 'black';
+    
+});
+});
+
+
 
 // const sum = function(arr) {
 // return arr.reduce((a,b) => a + b, 0);
