@@ -1,0 +1,61 @@
+.calculator {
+    display: grid;
+    justify-content: center;
+    align-items: stretch;
+    grid-template-columns: 150px 100px;
+    grid-template-rows: 50px 200px;
+    gap: 4px;
+    
+    margin-top: 10%;
+}
+.display {
+    display: grid;
+    align-items: center;
+    justify-content: space-between;
+    grid-template-columns: repeat(1fr, 2);
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+
+    border: 2px solid black;
+    padding: 8px;
+    background-color: lightgray;
+}
+.clear {
+    grid-column: 1 / 2;
+    background-color: lightslategray;
+}
+.values {
+    grid-column: 2 / 3;
+}
+.numbers {
+    display: grid;
+    grid-template-rows: repeat(1fr, 4);
+    grid-template-columns: repeat(1fr, 3);
+
+
+}
+.number {
+    background-color: lightcyan;
+}
+
+.zero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-row: 4/5;
+    grid-column: 1 / 4;
+}
+
+.operators {
+    display: grid;
+    grid-template-rows: repeat(3fr, 2) 1.5fr;
+    grid-template-columns: repeat(1fr, 2);
+}
+
+.op {
+    background-color: lightslategray;
+}
+
+.equals {
+    grid-column: 1 / 3;
+}
