@@ -1,4 +1,6 @@
+// Initial values
 let displayValue = 0;
+let operator = '';
 
 
 const add = function(a,b) {
@@ -41,33 +43,41 @@ const operate = function(a,op,b) {
 
 }
 
-const numbers = document.querySelectorAll('.number');
+const values = document.querySelector('.values');
 
+const clear = document.querySelector('.clear');
+
+clear.addEventListener("click",() => {
+    //clear the text content and reset variables on clear
+    displayValue = 0;
+    operator = '';
+    values.textContent = displayValue;
+});
+
+// Event listener for number clicks
+const numbers = document.querySelectorAll('.number');
 numbers.forEach((number) => {
 
     number.addEventListener("click", () => {
-        number.style.backgroundColor = 'black';
+        if(operator != ''){
+            displayValue = operate(displayValue, operator, number.textContent.charAt(0));
+        }
+        else{
+            displayValue = number.textContent.charAt(0);
+        }
+        
+        values.textContent = displayValue;
+        
     
 });
 });
 
+// Event listener for operator clicks
 const ops = document.querySelectorAll('.op');
-
 ops.forEach((op) => {
 
     op.addEventListener("click", () => {
-        op.style.backgroundColor = 'black';
+        operator = (op.textContent.charAt(0));
     
 });
 });
-
-
-
-// const sum = function(arr) {
-// return arr.reduce((a,b) => a + b, 0);
-// };
-
-// const multiply = function(arr) {
-//   return arr.reduce((a,b) => a * b, 1);
-// };
-
