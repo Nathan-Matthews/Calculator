@@ -1,7 +1,7 @@
 // Initial values
-let displayValue = 0;
+let firstValue = 0;
+let secondValue = 0;
 let operator = '';
-
 
 const add = function(a,b) {
 	return a + b;
@@ -44,31 +44,30 @@ const operate = function(a,op,b) {
 }
 
 const values = document.querySelector('.values');
-
 const clear = document.querySelector('.clear');
 
+// Clear the display and variables on 'clear'
 clear.addEventListener("click",() => {
-    //clear the text content and reset variables on clear
-    displayValue = 0;
+    firstValue = 0;
+    secondValue = 0;
     operator = '';
-    values.textContent = displayValue;
+    values.textContent = 0;
 });
 
 // Event listener for number clicks
 const numbers = document.querySelectorAll('.number');
 numbers.forEach((number) => {
-
     number.addEventListener("click", () => {
-        if(operator != ''){
-            displayValue = operate(displayValue, operator, number.textContent.charAt(0));
-        }
-        else{
-            displayValue = number.textContent.charAt(0);
-        }
-        
-        values.textContent = displayValue;
-        
-    
+
+        values.textContent += number.textContent
+        // if(operator != ''){
+        //     firstValue = operate(firstValue, operator, number.textContent.charAt(0));
+        //     operator = '';
+        // }
+        // else{
+        //     firstValue = number.textContent.charAt(0);
+        // }
+        // values.textContent = firstValue;    
 });
 });
 
@@ -77,6 +76,7 @@ const ops = document.querySelectorAll('.op');
 ops.forEach((op) => {
 
     op.addEventListener("click", () => {
+        firstValue = values.textContent;
         operator = (op.textContent.charAt(0));
     
 });
