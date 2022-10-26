@@ -1,28 +1,29 @@
 // Initial values
-let firstValue = 0;
-let secondValue = 0;
+let firstValue = '';
+let secondValue = '';
 let operator = '';
 
-const add = function(a,b) {
-	return a + b;
+// Operation functions
+function add(a,b) {
+	return +a + +b;
 };
 
-const subtract = function(a,b) {
-	return a - b;
+function subtract(a,b) {
+	return +a - +b;
 };
 
-const multiply = function(a,b){
-    return a * b;
+function multiply(a,b){
+    return +a * +b;
 };
 
-const divide = function(a,b) {
-    if(b == 0){
-        return 0;
+function divide(a,b) {
+    if(b == '0'){
+        return 'How dare you?';
     }
-    return a / b;
+    return +a / +b;
 };
 
-const operate = function(a,op,b) {
+function operate(a,op,b) {
     if(op == '+'){
         return add(a,b);
     }
@@ -43,40 +44,71 @@ const operate = function(a,op,b) {
 
 }
 
+function updateDisplay(input){
+    values.textContent = input;
+}
+
+// Document event selectors for event listeners.
+const numbers = document.querySelectorAll('.number');
+const equals = document.querySelector('.equals');
 const values = document.querySelector('.values');
 const clear = document.querySelector('.clear');
+const ops = document.querySelectorAll('.op');
 
 // Clear the display and variables on 'clear'
 clear.addEventListener("click",() => {
-    firstValue = 0;
-    secondValue = 0;
+    firstValue = '';
+    secondValue = '';
     operator = '';
-    values.textContent = 0;
+    updateDisplay('');
+});
+
+// Event listener for equals sign
+equals.addEventListener("click",() => {
+    // If equals is pressed before an operator, ignore it.
+    if(operator == ''){
+        return;
+    }
+    firstValue = operate(firstValue, operator, secondValue);
+    updateDisplay(firstValue);
+    // Reset the operator, if a user clicks equals
+    firstValue = '';
+    secondValue = '';
+    operator = '';
+
 });
 
 // Event listener for number clicks
-const numbers = document.querySelectorAll('.number');
+
 numbers.forEach((number) => {
     number.addEventListener("click", () => {
 
-        values.textContent += number.textContent
-        // if(operator != ''){
-        //     firstValue = operate(firstValue, operator, number.textContent.charAt(0));
-        //     operator = '';
-        // }
-        // else{
-        //     firstValue = number.textContent.charAt(0);
-        // }
-        // values.textContent = firstValue;    
+        // If a number is clicked and there is an operator value, we must be entering a second Value.
+        if(operator != ''){
+            secondValue += number.textContent;
+            updateDisplay(secondValue);
+        }
+        else{
+            firstValue += number.textContent;
+            updateDisplay(firstValue);
+        }   
 });
 });
 
 // Event listener for operator clicks
-const ops = document.querySelectorAll('.op');
+// Updates 'operator' variable to the most recently clicked operator.
 ops.forEach((op) => {
 
+    // if second value is not empty and an operator was clicked, add value one and two to valueOne
     op.addEventListener("click", () => {
-        firstValue = values.textContent;
+        // Check if a second operation is being performed without clicking equals
+        if (operator != '' && secondValue != ''){
+            firstValue = operate(firstValue, operator, secondValue);
+            updateDisplay(firstValue);
+            // Perform an operation the same as equals but update with the new op.
+            secondValue = '';
+            operator = (op.textContent.charAt(0));
+        }
         operator = (op.textContent.charAt(0));
     
 });
