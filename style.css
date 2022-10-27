@@ -49,7 +49,7 @@
 
 .operators {
     display: grid;
-    grid-template-rows: repeat(1fr, 3);
+    grid-template-rows: repeat(1fr, 4);
     grid-template-columns: repeat(1fr, 2);
     gap: 4px;
 }
@@ -59,5 +59,9 @@
 }
 
 .equals {
+    grid-column: 1 / 3;
+}
+
+.backspace {
     grid-column: 1 / 3;
 }
